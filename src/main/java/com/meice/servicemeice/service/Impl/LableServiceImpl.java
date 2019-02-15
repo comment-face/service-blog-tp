@@ -16,22 +16,22 @@ public class LableServiceImpl implements LableService {
 
     @Override
     public int countByExample(LableExample example) {
-        return 0;
+        return lableMapper.countByExample(example);
     }
 
     @Override
     public int deleteByExample(LableExample example) {
-        return 0;
+        return lableMapper.deleteByExample(example);
     }
 
     @Override
     public int insert(Lable record) {
-        return 0;
+        return lableMapper.insert(record);
     }
 
     @Override
     public int insertSelective(Lable record) {
-        return 0;
+        return lableMapper.insertSelective(record);
     }
 
     @Override
@@ -41,11 +41,11 @@ public class LableServiceImpl implements LableService {
 
     @Override
     public int updateByExampleSelective(Lable record, LableExample example) {
-        return 0;
+        return lableMapper.updateByExampleSelective(record , example);
     }
 
     @Override
     public int updateByExample(Lable record, LableExample example) {
-        return 0;
+        return lableMapper.updateByExample(record , example);
     }
 }

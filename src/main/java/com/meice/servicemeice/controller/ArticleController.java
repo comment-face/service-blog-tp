@@ -1,5 +1,6 @@
 package com.meice.servicemeice.controller;
 
+import com.ikuijia.toolkit.biz.convert.GeneralConv;
 import com.ikuijia.webmvc.support.builder.JsonResultBuilder;
 import com.ikuijia.webmvc.support.result.PageJsonResult;
 import com.ikuijia.webmvc.support.result.Result;
@@ -10,6 +11,8 @@ import com.meice.servicemeice.entity.VO.ArticleVo;
 import com.meice.servicemeice.service.ArticleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +29,7 @@ import java.util.Optional;
 @RequestMapping("/ArticleController")
 @Api(description = "文章接口")
 public class ArticleController {
+    private static final Logger LOG = LoggerFactory.getLogger(ArticleController.class);
 
     @Autowired
     ArticleService articleService;
@@ -51,26 +55,44 @@ public class ArticleController {
 
     @PostMapping("/updateArticle")
     @ApiOperation(value="修改文章",notes = "修改文章")
-    public Boolean updateArticle(@RequestBody @Valid Article article){
-        return  articleService.updateByPrimaryKey(article)>0;
+    public Result<Boolean> updateArticle(@RequestBody  Article article){
+        try {
+            if(articleService.updateByPrimaryKey(article)>0)
+                return  JsonResultBuilder.simpleFail("200","修改成功！");
+        }catch (Exception e){
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
+        return  JsonResultBuilder.simpleFail("200","操作失败！");
     }
 
 
     @PostMapping("/addArticle")
     @ApiOperation(value="新增文章",notes = "新增文章")
-    public List<Article> addArticle(@RequestBody @Valid ArticleFrom articleFrom){
-        ArticleExample articleExample =new ArticleExample();
-        articleExample.createCriteria();
-        List<Article> articleList = articleService.selectByExample(articleExample);
-        return  articleList;
+    public Result<Boolean> addArticle(@RequestBody  Article article){
+        try {
+            if(articleService.insert(article)>0)
+                return  JsonResultBuilder.simpleFail("200","新增成功！");
+        }catch (Exception e){
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
+        return  JsonResultBuilder.simpleFail("200","操作失败！");
     }
 
     @PostMapping("/deleteArticle")
     @ApiOperation(value="删除文章",notes = "删除文章")
-    public Boolean deleteArticle(@RequestBody @Valid String articleId){
+    public Result<Boolean> deleteArticle(@RequestBody @Valid String articleId){
         ArticleExample articleExample =new ArticleExample();
         articleExample.createCriteria().andArticleidEqualTo(articleId);
-        return  articleService.deleteByExample(articleExample)>0;
+        try {
+            if(articleService.deleteByExample(articleExample)>0)
+                return  JsonResultBuilder.simpleFail("200","删除成功！");
+        }catch (Exception e){
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
+        return  JsonResultBuilder.simpleFail("200","操作失败！");
     }
 
 }

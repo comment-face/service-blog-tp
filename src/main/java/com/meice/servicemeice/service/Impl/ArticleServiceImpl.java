@@ -24,22 +24,22 @@ public class ArticleServiceImpl implements ArticleService{
 
     @Override
     public int deleteByExample(ArticleExample example) {
-        return 0;
+        return articleMapper.deleteByExample(example);
     }
 
     @Override
     public int deleteByPrimaryKey(String articleid) {
-        return 0;
+        return articleMapper.deleteByPrimaryKey(articleid);
     }
 
     @Override
     public int insert(Article record) {
-        return 0;
+        return articleMapper.insert(record);
     }
 
     @Override
     public int insertSelective(Article record) {
-        return 0;
+        return articleMapper.insertSelective(record);
     }
 
     @Override
@@ -54,22 +54,22 @@ public class ArticleServiceImpl implements ArticleService{
 
     @Override
     public int updateByExampleSelective(Article record, ArticleExample example) {
-        return 0;
+        return articleMapper.updateByExampleSelective(record,example);
     }
 
     @Override
     public int updateByExample(Article record, ArticleExample example) {
-        return 0;
+        return articleMapper.updateByExample(record,example);
     }
 
     @Override
     public int updateByPrimaryKeySelective(Article record) {
-        return 0;
+        return articleMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByPrimaryKey(Article record) {
-        return 0;
+        return articleMapper.updateByPrimaryKey(record);
     }
 
     @Override

@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,7 @@ public class LableController {
 
     @PostMapping("/queryLable")
     @ApiOperation(value="根据ID查询Lable",notes = "根据ID查询Lable")
-    public Result<List<Lable>> queryLable(Integer lableId){
+    public Result<List<Lable>> queryLable(@RequestBody Integer lableId){
         LableExample lableExample =new LableExample();
         lableExample.createCriteria().andLableidEqualTo(lableId);
         return JsonResultBuilder.simpleSucc(lableService.selectByExample(lableExample));
@@ -32,26 +33,28 @@ public class LableController {
 
     @PostMapping("/deleteLable")
     @ApiOperation(value="根据ID删除Lable",notes = "根据ID删除Lable，入参主键ID")
-    public Result<List<Lable>> deleteLable(Integer lableId){
+    public Result<Boolean> deleteLable(@RequestBody  Integer lableId){
         LableExample lableExample =new LableExample();
         lableExample.createCriteria().andLableidEqualTo(lableId);
-        return JsonResultBuilder.simpleSucc(lableService.deleteByExample(lableExample));
+        return lableService.deleteByExample(lableExample)>0?
+                JsonResultBuilder.simpleFail("200","删除成功！"):
+                JsonResultBuilder.simpleFail("500","删除失败！");
     }
 
     @PostMapping("/updateLable")
     @ApiOperation(value="修改Lable",notes = "修改Lable，入参Lable类")
-    public Result<List<Lable>> updateLable(Integer lableId){
+    public Result<Boolean> updateLable(@RequestBody Integer lableId){
         LableExample lableExample =new LableExample();
-        lableExample.createCriteria().andLableidEqualTo(lableId);
-        return JsonResultBuilder.simpleSucc(lableService.selectByExample(lableExample));
+//        lableService.updateByExample()
+        return null;
     }
 
     @PostMapping("/addLable")
-    @ApiOperation(value="根据ID查询Lable",notes = "根据ID查询Lable")
-    public Result<List<Lable>> addLable(Integer lableId){
-        LableExample lableExample =new LableExample();
-        lableExample.createCriteria().andLableidEqualTo(lableId);
-        return JsonResultBuilder.simpleSucc(lableService.selectByExample(lableExample));
+    @ApiOperation(value="新增Lable",notes = "新增Lable")
+    public Result<List<Lable>> addLable(@RequestBody Lable lable){
+        return lableService.insert(lable)>0?
+                JsonResultBuilder.simpleFail("200","删除成功！"):
+                JsonResultBuilder.simpleFail("500","删除失败！");
     }
 
 

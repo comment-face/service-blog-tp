@@ -1,20 +1,32 @@
 package com.meice.servicemeice.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Article {
+    @ApiModelProperty(value = "文章ID")
     private String articleid;
 
+    @ApiModelProperty(value = "标题")
     private String title;
 
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date time;
 
+    @ApiModelProperty(value = "创建人")
     private String createname;
 
+    @ApiModelProperty(value = "标签,分类")
     private String lableid;
 
+    @ApiModelProperty(value = "文章内容")
     private String context;
 
+    @ApiModelProperty(value = "0:转载 1:原创")
     private Integer articletype;
 
     public String getArticleid() {
