@@ -23,12 +23,37 @@ public class LableController {
     LableService lableService;
 
     @PostMapping("/queryLable")
-    @ApiOperation(value="根据ID查询文章",notes = "根据ID查询文章")
-    public Result<List<Lable>> queryArticleById(){
+    @ApiOperation(value="根据ID查询Lable",notes = "根据ID查询Lable")
+    public Result<List<Lable>> queryLable(Integer lableId){
         LableExample lableExample =new LableExample();
-        lableExample.createCriteria();
+        lableExample.createCriteria().andLableidEqualTo(lableId);
         return JsonResultBuilder.simpleSucc(lableService.selectByExample(lableExample));
     }
+
+    @PostMapping("/deleteLable")
+    @ApiOperation(value="根据ID删除Lable",notes = "根据ID删除Lable，入参主键ID")
+    public Result<List<Lable>> deleteLable(Integer lableId){
+        LableExample lableExample =new LableExample();
+        lableExample.createCriteria().andLableidEqualTo(lableId);
+        return JsonResultBuilder.simpleSucc(lableService.deleteByExample(lableExample));
+    }
+
+    @PostMapping("/updateLable")
+    @ApiOperation(value="修改Lable",notes = "修改Lable，入参Lable类")
+    public Result<List<Lable>> updateLable(Integer lableId){
+        LableExample lableExample =new LableExample();
+        lableExample.createCriteria().andLableidEqualTo(lableId);
+        return JsonResultBuilder.simpleSucc(lableService.selectByExample(lableExample));
+    }
+
+    @PostMapping("/addLable")
+    @ApiOperation(value="根据ID查询Lable",notes = "根据ID查询Lable")
+    public Result<List<Lable>> addLable(Integer lableId){
+        LableExample lableExample =new LableExample();
+        lableExample.createCriteria().andLableidEqualTo(lableId);
+        return JsonResultBuilder.simpleSucc(lableService.selectByExample(lableExample));
+    }
+
 
 
 }

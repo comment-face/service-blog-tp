@@ -11,6 +11,7 @@ import com.meice.servicemeice.service.ArticleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -56,7 +58,7 @@ public class ArticleController {
 
     @PostMapping("/addArticle")
     @ApiOperation(value="新增文章",notes = "新增文章")
-    public List<Article> addArticle(@RequestBody @Valid String name){
+    public List<Article> addArticle(@RequestBody @Valid ArticleFrom articleFrom){
         ArticleExample articleExample =new ArticleExample();
         articleExample.createCriteria();
         List<Article> articleList = articleService.selectByExample(articleExample);

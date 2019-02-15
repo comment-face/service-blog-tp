@@ -5,7 +5,7 @@
 
     <groupId>com.meice</groupId>
     <artifactId>service-meice</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <packaging>jar</packaging>
 
     <name>service-meice</name>
@@ -137,11 +137,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.systp</groupId>
-            <artifactId>pagePulgin</artifactId>
-            <version>1.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.systp</groupId>-->
+            <!--<artifactId>pagePulgin</artifactId>-->
+            <!--<version>1.0</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -182,43 +182,48 @@
 
     <build>
         <plugins>
-            <plugin>
+            <!--<plugin>-->
 
+                <!--<groupId>org.mybatis.generator</groupId>-->
+                <!--<artifactId>mybatis-generator-maven-plugin</artifactId>-->
+                <!--<version>1.3.2</version>-->
+                <!--<configuration>-->
+                    <!--<overwrite>true</overwrite>-->
+                <!--</configuration>-->
+                <!--<dependencies>-->
+                    <!--<dependency>-->
+                        <!--<groupId>mysql</groupId>-->
+                        <!--<artifactId>mysql-connector-java</artifactId>-->
+                        <!--<version>5.1.34</version>-->
+                    <!--</dependency>-->
+                    <!--<dependency>-->
+                        <!--<groupId>com.systp</groupId>-->
+                        <!--<artifactId>pagePulgin</artifactId>-->
+                        <!--<version>1.0</version>-->
+                    <!--</dependency>-->
+                <!--</dependencies>-->
+
+
+            <!--</plugin>-->
+            <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.3.2</version>
-                <configuration>
-                    <overwrite>true</overwrite>
-                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>mysql</groupId>
                         <artifactId>mysql-connector-java</artifactId>
                         <version>5.1.34</version>
                     </dependency>
-                    <dependency>
-                        <groupId>com.systp</groupId>
-                        <artifactId>pagePulgin</artifactId>
-                        <version>1.0</version>
-                    </dependency>
                 </dependencies>
-
-
+                <configuration>
+                    <overwrite>true</overwrite>
+                </configuration>
             </plugin>
+
             <plugin>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>1.3.2</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>5.1.34</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <overwrite>true</overwrite>
-                </configuration>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
 
