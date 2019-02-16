@@ -39,8 +39,8 @@ public class ArticleController {
     public PageJsonResult<List<ArticleVo>> queryPage(@RequestBody @Valid ArticleFrom articleFrom){
         ArticleExample articleExample =new ArticleExample();
         articleExample.createCriteria();
-        articleExample.setLimit(articleFrom.getPageSize());
-        articleExample.setOffset(articleFrom.start());
+        articleExample.setOffset(articleFrom.getPageSize());
+        articleExample.setLimit(articleFrom.start());
         List<ArticleVo> articleVos = articleService.selectArticleInnerLable(articleExample);
         //pageSize每条页数   page当前页   totalSize 总页数
         return JsonResultBuilder.pageSucc(articleVos,articleFrom.start(),articleFrom.getPageSize(),articleService.countByExample(articleExample));

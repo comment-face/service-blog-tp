@@ -25,9 +25,13 @@ public class LableController {
 
     @PostMapping("/queryLable")
     @ApiOperation(value="根据ID查询Lable",notes = "根据ID查询Lable")
-    public Result<List<Lable>> queryLable(@RequestBody Integer lableId){
+    public Result<List<Lable>> queryLable(Integer lableId){
         LableExample lableExample =new LableExample();
-        lableExample.createCriteria().andLableidEqualTo(lableId);
+        if(null != lableId){
+            lableExample.createCriteria().andLableidEqualTo(lableId);
+        }else {
+            lableExample.createCriteria();
+        }
         return JsonResultBuilder.simpleSucc(lableService.selectByExample(lableExample));
     }
 
