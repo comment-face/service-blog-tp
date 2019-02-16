@@ -11,9 +11,9 @@ import java.io.Serializable;
 public class CommenFrom implements Serializable{
     private static final long serialVersionUID = -7440446558051469628L;
     @NotNull
-    int page;
+    int page=1;
     @NotNull
-    int pageSize;
+    int pageSize=5;
 
 
     public int start() {
