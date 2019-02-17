@@ -1,6 +1,6 @@
 package com.meice.servicemeice.controller;
 
-import com.ikuijia.toolkit.biz.convert.GeneralConv;
+import com.ikuijia.toolkit.common.StringUtil;
 import com.ikuijia.webmvc.support.builder.JsonResultBuilder;
 import com.ikuijia.webmvc.support.result.PageJsonResult;
 import com.ikuijia.webmvc.support.result.Result;
@@ -14,7 +14,6 @@ import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
@@ -38,13 +36,20 @@ public class ArticleController {
     @ApiOperation(value="分页查询文章",notes = "分页查询文章")
     public PageJsonResult<List<ArticleVo>> queryPage(@RequestBody @Valid ArticleFrom articleFrom){
         ArticleExample articleExample =new ArticleExample();
-        articleExample.createCriteria();
-        articleExample.setOffset(articleFrom.getPageSize());
-        articleExample.setLimit(articleFrom.start());
+        //查询条件:文章ID
+        if (StringUtil.isNotBlank(articleFrom.getArticleid())){
+            articleExample.createCriteria().andArticleidEqualTo(articleFrom.getArticleid());
+        }
+        articleExample.setOffset(articleFrom.start());
+        articleExample.setLimit(articleFrom.getPageSize());
         List<ArticleVo> articleVos = articleService.selectArticleInnerLable(articleExample);
         //pageSize每条页数   page当前页   totalSize 总页数
-        return JsonResultBuilder.pageSucc(articleVos,articleFrom.start(),articleFrom.getPageSize(),articleService.countByExample(articleExample));
+        return JsonResultBuilder.pageSucc(articleVos,articleFrom.getPage(),articleFrom.getPageSize(),articleService.countByExample(articleExample));
     }
+
+
+
+
 
     @PostMapping("/queryArticleById")
     @ApiOperation(value="根据ID查询文章",notes = "根据ID查询文章")

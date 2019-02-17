@@ -3,7 +3,6 @@ package com.meice.servicemeice.entity.From;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
@@ -20,6 +19,10 @@ public class ArticleFrom extends  CommenFrom implements Serializable {
 
     @ApiModelProperty(value = "文章分类名称")
     private String lablename;
+
+    @ApiModelProperty(value = "文章分类ID")
+    private String lableID;
+
 
 
 }
