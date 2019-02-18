@@ -2,6 +2,7 @@ package com.meice.servicemeice.controller;
 
 import com.ikuijia.webmvc.support.builder.JsonResultBuilder;
 import com.ikuijia.webmvc.support.result.Result;
+import com.meice.servicemeice.entity.From.CommenParamKeyFrom;
 import com.meice.servicemeice.entity.Lable;
 import com.meice.servicemeice.entity.LableExample;
 import com.meice.servicemeice.service.LableService;
@@ -25,10 +26,10 @@ public class LableController {
 
     @PostMapping("/queryLable")
     @ApiOperation(value="根据ID查询Lable",notes = "根据ID查询Lable")
-    public Result<List<Lable>> queryLable(Integer lableId){
+    public Result<List<Lable>> queryLable(@RequestBody CommenParamKeyFrom commenParamKeyFrom){
         LableExample lableExample =new LableExample();
-        if(null != lableId){
-            lableExample.createCriteria().andLableidEqualTo(lableId);
+        if(null != commenParamKeyFrom.getId()){
+            lableExample.createCriteria().andLableidEqualTo(commenParamKeyFrom.getId());
         }else {
             lableExample.createCriteria();
         }
